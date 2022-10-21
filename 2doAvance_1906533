@@ -1,0 +1,166 @@
+#include <iostream>
+#include <string.h>
+#include <string>
+#include <conio.h>
+#include <stdio.h>
+#include <windows.h>
+//Utilice el programa Dev C++
+
+using namespace std;
+
+struct Gamer
+{
+    int numart=0, lan=0;
+    float preuni=0, iva=0, total=0;
+    string vid, cla, desc, gen;
+};
+
+float iva(float x, float y);
+float total(float x, float y);
+
+int main()
+{
+	Gamer juegos[3];
+    int opc, opc2;
+    string gen2, cla2;
+    
+    do
+    {
+    	printf("\t ***Tienda de Videojuegos GamerUniverse*** \n");
+    	printf(" 1.-Agregar Articulo \n 2.-Modificar Articulo\n 3.-Eliminar Articulo\n 4.-Lista de Articulos\n 5.-Limpiar Pantalla\n 6.-Salir\n");
+    	scanf("%d", &opc);
+
+    	switch (opc)
+    	{
+    	case 1: //Agregar Articulo
+    		for (int i=0; i<3; i++)
+    		{
+    			do
+    			{
+    				cout << "Ingrese el numero de articulo:\n";
+        			scanf("%d", &juegos[i].numart);
+				}
+				while (juegos[i].numart == juegos[i - 1].numart || juegos[i].numart == juegos[i - 2].numart);
+        		printf("Ingrese el nombre del videojuego:\n");
+        		cin.ignore();
+        		getline(cin, juegos[i].vid);
+        		printf("Ingrese a%co de lanzamiento:\n", 164);
+        		scanf("%d", &juegos[i].lan);
+        		cout << "Ingrese la clasificacion del videojuego:\n";
+        		cin.ignore();
+        		getline(cin, juegos[i].cla);
+        		printf("Ingrese el descripcion del vieojuego:\n");
+        		cin.ignore();
+        		getline(cin, juegos[i].desc);
+        		printf("Ingrese genero del videojuego:\n");
+        		cin.ignore();
+        		getline(cin, juegos[i].gen);
+        		printf("Ingrese el precio del videojuego:\n");
+        		scanf("%f", &juegos[i].preuni);
+        		printf("El precio del videojuego es de: $%f\n", juegos[i].preuni);
+            	juegos[i].iva = iva(juegos[i].preuni, 0.16);
+            	printf("El iva es de: $%f\n", juegos[i].iva);
+            	juegos[i].total = total(juegos[i].preuni, juegos[i].iva);
+            	printf("El precio total es de: $%f\n", juegos[i].total);
+            	system("pause");
+        	}
+        	break;
+
+    	case 2: //Modificar Articulo
+    	//Pendiente
+        	break;
+
+    	case 3://Eliminar Articulo
+    	//Pendiente
+        	break;
+
+    	case 4: //Lista de Articulos
+    		printf("Eliga la forma de ver la lista: \n");
+    		printf("1.-Genero \n 2.-Clasificacion \n 3.-Todas \n");
+    		scanf("%d", &opc2);
+    		switch (opc2)
+    		{
+    		case 1:
+    			printf("Ingrese el genero a buscar: \n");
+    			cin.ignore();
+    			getline(cin, gen2);
+    			for (int i=0; i<3; i++)
+    			{
+    				if (gen2.compare(juegos[i].gen)==0)
+    				{
+    					printf("Numero del articulo: %d \n", juegos[i].numart);
+    					printf("Nombre del Videojuego: %s \n", juegos[i].vid.c_str());
+    					printf("A%co de lanzamiento: %d \n", 164, juegos[i].lan);
+    					printf("Clasificacion: %s \n", juegos[i].cla.c_str());
+    					printf("Descripcion: %s \n", juegos[i].desc.c_str());
+    					printf("Genero: %s \n", juegos [i].gen.c_str());
+    					printf("Precio: $%f \n", juegos[i].preuni);
+    					printf("Iva: $%f \n", juegos[i].iva);
+    					printf("Precio total: $%f \n", juegos[i].total);
+    					system("pause");
+					}
+				}
+				break;
+			case 2:
+				printf("Ingrese la clasificacion a buscar: \n");
+				cin.ignore();
+				getline(cin, cla2);
+				for (int i=0; i<3; i++)
+    			{
+    				if (cla2.compare(juegos[i].cla)==0)
+    				{
+    					printf("Numero del articulo: %d \n", juegos[i].numart);
+    					printf("Nombre del Videojuego: %s \n", juegos[i].vid.c_str());
+    					printf("A%co de lanzamiento: %d \n", 164, juegos[i].lan);
+    					printf("Clasificacion: %s \n", juegos[i].cla.c_str());
+    					printf("Descripcion: %s \n", juegos[i].desc.c_str());
+    					printf("Genero: %s \n", juegos [i].gen.c_str());
+    					printf("Precio: $%f \n", juegos[i].preuni);
+    					printf("Iva: $%f \n", juegos[i].iva);
+    					printf("Precio total: $%f \n", juegos[i].total);
+    					system("pause");
+					}
+				}
+				break;
+			case 3:
+				for (int i=0; i<3; i++)
+    			{
+    				printf("Numero del articulo: %d \n", juegos[i].numart);
+    				printf("Nombre del Videojuego: %s \n", juegos[i].vid.c_str());
+    				printf("A%co de lanzamiento: %d \n", 164, juegos[i].lan);
+    				printf("Clasificacion: %s \n", juegos[i].cla.c_str());
+    				printf("Descripcion: %s \n", juegos[i].desc.c_str());
+    				printf("Genero: %s \n", juegos [i].gen.c_str());
+    				printf("Precio: $%f \n", juegos[i].preuni);
+    				printf("Iva: $%f \n", juegos[i].iva);
+    				printf("Precio total: $%f \n", juegos[i].total);
+    				system("pause");
+				}
+			}
+        	break;
+
+    	case 5: //Limpiar Pantalla
+        	system("cls");
+        	return main();
+        	break;
+
+    	case 6: //salir
+        	printf("Gracias por utilizar el programa... \n");
+        	break;
+        }
+    } while (opc!= 6);
+}
+
+float iva(float x, float y)
+{
+    float res;
+    res = x * y;
+    return res;
+}
+
+float total(float x, float y)
+{
+    float res;
+    res = x + y;
+    return res;
+}
